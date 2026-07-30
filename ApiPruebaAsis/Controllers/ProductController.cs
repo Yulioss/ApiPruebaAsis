@@ -1,83 +1,28 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiPruebaAsis.Application.DTOs;
+using ApiPruebaAsis.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPruebaAsis.Controllers
 {
-    public class ProductController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class ProductController : ControllerBase
     {
-        // GET: ProductController
-        public ActionResult Index()
+        public readonly IProductService _productService;
+        public ProductController(IProductService productService)
         {
-            return View();
+            _productService = productService;
         }
-
-        // GET: ProductController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ProductController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ProductController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> GenerateProducts(GenerateProductsDto dto)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            await _productService.GenerateProductsService(dto.Quantity);
 
-        // GET: ProductController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+            return Ok(new
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ProductController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ProductController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                Message = $"{dto.Quantity} productos generados correctamente."
+            });
         }
     }
 }

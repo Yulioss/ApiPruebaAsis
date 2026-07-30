@@ -1,6 +1,7 @@
 ﻿using ApiPruebaAsis.Domain.Entitites;
 using ApiPruebaAsis.Infrastructure.Data;
 using ApiPruebaAsis.Application.Interfaces;
+using Microsoft.EntityFrameworkCore;
 namespace ApiPruebaAsis.Infrastructure.Repositories
 {
     public class CategoryRepository : ICategoryRepository
@@ -19,6 +20,13 @@ namespace ApiPruebaAsis.Infrastructure.Repositories
             await _context.SaveChangesAsync();
 
             return category;
+        }
+
+        public async Task<List<Category>> GetAllAsync()
+        {
+            return await _context.Categories
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }
