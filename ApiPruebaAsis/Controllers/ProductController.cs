@@ -1,4 +1,5 @@
 ﻿using ApiPruebaAsis.Application.DTOs;
+using ApiPruebaAsis.Application.DTOs.Product;
 using ApiPruebaAsis.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,12 +18,25 @@ namespace ApiPruebaAsis.Controllers
         [HttpPost]
         public async Task<IActionResult> GenerateProducts(GenerateProductsDto dto)
         {
-            await _productService.GenerateProductsService(dto.Quantity);
+            await _productService.GenerateProducts(dto.Quantity);
 
             return Ok(new
             {
                 Message = $"{dto.Quantity} productos generados correctamente."
             });
+        }
+        [HttpGet]
+        public async Task<ActionResult<PagedResponse<ProductDto>>> GetProducts([FromQuery] ProductQueryDto query)
+        {
+            return Ok(await _productService.GetProducts(query));
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductDto>> GetById(int id)
+        {
+            var product = await _productService.GetById(id);
+
+            return Ok(product);
         }
     }
 }

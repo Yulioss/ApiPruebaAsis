@@ -1,4 +1,4 @@
-﻿using ApiPruebaAsis.Application.DTOs;
+﻿using ApiPruebaAsis.Application.DTOs.Category;
 using System;
 using System.Collections.Generic;
 using System.Linq;

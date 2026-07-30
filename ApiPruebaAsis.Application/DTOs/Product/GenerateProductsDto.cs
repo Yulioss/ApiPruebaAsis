@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiPruebaAsis.Application.DTOs
+namespace ApiPruebaAsis.Application.DTOs.Product
 {
     public class GenerateProductsDto
     {

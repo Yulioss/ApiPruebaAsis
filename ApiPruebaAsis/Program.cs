@@ -2,6 +2,7 @@ using ApiPruebaAsis.Application.Interfaces;
 using ApiPruebaAsis.Application.Services;
 using ApiPruebaAsis.Infrastructure.Data;
 using ApiPruebaAsis.Infrastructure.Repositories;
+using ApiPruebaAsis.Middleware;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -40,6 +41,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 

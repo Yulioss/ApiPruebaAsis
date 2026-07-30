@@ -1,4 +1,4 @@
-﻿using ApiPruebaAsis.Application.DTOs;
+﻿using ApiPruebaAsis.Application.DTOs.Supplier;
 using ApiPruebaAsis.Domain.Entitites;
 using AutoMapper;
 using System;

@@ -1,4 +1,4 @@
-﻿using ApiPruebaAsis.Application.DTOs;
+﻿using ApiPruebaAsis.Application.DTOs.Category;
 using ApiPruebaAsis.Application.Interfaces;
 using ApiPruebaAsis.Domain.Entitites;
 using AutoMapper;

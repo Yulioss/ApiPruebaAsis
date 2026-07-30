@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiPruebaAsis.Application.DTOs
+namespace ApiPruebaAsis.Application.DTOs.Supplier
 {
-    public class CreateSupplierDto
+    public class SupplierDto
     {
+        public int SupplierId { get; set; }
+
         public string CompanyName { get; set; } = string.Empty;
 
         public string? ContactName { get; set; }

@@ -1,10 +1,14 @@
-﻿using ApiPruebaAsis.Application.Interfaces;
+﻿using ApiPruebaAsis.Application.DTOs.Product;
+using ApiPruebaAsis.Application.DTOs;
+using ApiPruebaAsis.Application.Interfaces;
 using ApiPruebaAsis.Domain.Entitites;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using ApiPruebaAsis.Application.Exceptions;
 
 namespace ApiPruebaAsis.Application.Services
 {
@@ -13,13 +17,15 @@ namespace ApiPruebaAsis.Application.Services
         private readonly IProductRepository _repository;
         private readonly ICategoryRepository _categoryRepository;
         private readonly ISupplierRepository _supplierRepository;
-        public ProductsService(IProductRepository repository, ICategoryRepository categoryRepository, ISupplierRepository supplierRepository)
+        private readonly IMapper _mapper;
+        public ProductsService(IProductRepository repository, ICategoryRepository categoryRepository, ISupplierRepository supplierRepository, IMapper mapper)
         {
             _repository = repository;
             _categoryRepository = categoryRepository;
             _supplierRepository = supplierRepository;
+            _mapper = mapper;
         }
-        public async Task GenerateProductsService(int quantity)
+        public async Task GenerateProducts(int quantity)
         {
             var random = new Random();
 
@@ -53,6 +59,33 @@ namespace ApiPruebaAsis.Application.Services
             }
 
             await _repository.AddRangeAsync(products);
+        }
+
+        public async Task<PagedResponse<ProductDto>> GetProducts(ProductQueryDto query)
+        {
+            var result = await _repository.GetProductsAsync(query);
+
+            return new PagedResponse<ProductDto>
+            {
+                Data = _mapper.Map<List<ProductDto>>(result.Data),
+
+                Page = result.Page,
+
+                PageSize = result.PageSize,
+
+                TotalPages = result.TotalPages,
+
+                TotalRecords = result.TotalRecords
+            };
+        }
+        public async Task<ProductDto?> GetById(int id)
+        {
+            var product = await _repository.GetByIdAsync(id);
+
+            if (product == null)
+                throw new NotFoundException("Producto no encontrado.");
+
+            return _mapper.Map<ProductDto>(product);
         }
     }
 }
