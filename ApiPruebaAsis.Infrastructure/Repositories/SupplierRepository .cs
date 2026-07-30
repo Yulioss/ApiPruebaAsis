@@ -34,5 +34,12 @@ namespace ApiPruebaAsis.Infrastructure.Repositories
 
             return supplier;
         }
+
+        public async Task<Supplier?> GetByIdAsync(int id)
+        {
+            return await _context.Suppliers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.SupplierId == id);
+        }
     }
 }

@@ -11,8 +11,11 @@ namespace ApiPruebaAsis.Application.Interfaces
 {
     public interface IProductRepository
     {
+        Task<Product> AddAsync(Product product);
         Task AddRangeAsync(List<Product> products);
         Task<PagedResponse<Product>> GetProductsAsync(ProductQueryDto query);
         Task<Product?> GetByIdAsync(int id);
+        Task UpdateAsync(Product product);
+        Task DeleteAsync(Product product);
     }
 }

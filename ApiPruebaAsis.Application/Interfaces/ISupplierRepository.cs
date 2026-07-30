@@ -11,5 +11,6 @@ namespace ApiPruebaAsis.Application.Interfaces
     {
         Task<List<Supplier>> GetAllAsync();
         Task<Supplier> AddAsync(Supplier supplier);
+        Task<Supplier?> GetByIdAsync(int id);
     }
 }

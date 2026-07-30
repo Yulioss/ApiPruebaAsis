@@ -28,5 +28,12 @@ namespace ApiPruebaAsis.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToListAsync();
         }
+
+        public async Task<Category?> GetByIdAsync(int id)
+        {
+            return await _context.Categories
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.CategoryId == id);
+        }
     }
 }

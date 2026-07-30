@@ -10,8 +10,11 @@ namespace ApiPruebaAsis.Application.Interfaces
 {
     public interface IProductService
     {
+        Task<ProductDto> CreateAsync(CreateProductDto dto);
         Task GenerateProducts(int quantity);
         Task<PagedResponse<ProductDto>> GetProducts(ProductQueryDto query);
         Task<ProductDto?> GetById(int id);
+        Task Update(int id, UpdateProductDto dto);
+        Task Delete(int id);
     }
 }

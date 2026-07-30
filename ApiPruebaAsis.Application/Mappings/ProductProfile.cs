@@ -18,6 +18,11 @@ namespace ApiPruebaAsis.Application.Mappings
                 y => y.MapFrom(z => z.Category.CategoryName))
             .ForMember(x => x.SupplierName,
                 y => y.MapFrom(z => z.Supplier.CompanyName));
+
+            CreateMap<UpdateProductDto, Product>();
+
+            CreateMap<CreateProductDto, Product>();
+
         }
     }
 }

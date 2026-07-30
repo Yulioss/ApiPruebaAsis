@@ -25,6 +25,30 @@ namespace ApiPruebaAsis.Application.Services
             _supplierRepository = supplierRepository;
             _mapper = mapper;
         }
+        public async Task<ProductDto> CreateAsync(CreateProductDto dto)
+        {
+            var category = await _categoryRepository.GetByIdAsync(dto.CategoryId);
+
+            if (category == null)
+                throw new NotFoundException($"La categoría {dto.CategoryId} no existe.");
+
+            if (dto.SupplierId.HasValue)
+            {
+                var supplier = await _supplierRepository.GetByIdAsync(dto.SupplierId.Value);
+
+                if (supplier == null)
+                    throw new NotFoundException($"El proveedor {dto.SupplierId} no existe.");
+            }
+
+            var product = _mapper.Map<Product>(dto);
+
+            product = await _repository.AddAsync(product);
+
+            product = await _repository.GetByIdAsync(product.ProductId);
+
+            return _mapper.Map<ProductDto>(product!);
+        }
+
         public async Task GenerateProducts(int quantity)
         {
             var random = new Random();
@@ -86,6 +110,28 @@ namespace ApiPruebaAsis.Application.Services
                 throw new NotFoundException("Producto no encontrado.");
 
             return _mapper.Map<ProductDto>(product);
+        }
+
+        public async Task Update(int id, UpdateProductDto dto)
+        {
+            var product = await _repository.GetByIdAsync(id);
+
+            if (product == null)
+                throw new NotFoundException($"No existe un producto con el id {id}");
+
+            _mapper.Map(dto, product);
+
+            await _repository.UpdateAsync(product);
+        }
+
+        public async Task Delete(int id)
+        {
+            var product = await _repository.GetByIdAsync(id);
+
+            if (product == null)
+                throw new NotFoundException($"No existe un producto con el id {id}");
+
+            await _repository.DeleteAsync(product);
         }
     }
 }

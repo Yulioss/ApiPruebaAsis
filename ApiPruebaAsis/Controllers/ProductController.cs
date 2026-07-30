@@ -15,7 +15,19 @@ namespace ApiPruebaAsis.Controllers
         {
             _productService = productService;
         }
+
         [HttpPost]
+        public async Task<ActionResult<ProductDto>> Create(CreateProductDto dto)
+        {
+            var product = await _productService.CreateAsync(dto);
+
+            return CreatedAtAction(
+                nameof(GetById),
+                new { id = product.ProductId },
+                product);
+        }
+
+        [HttpPost("Generate", Name = "GenerateProducts")]
         public async Task<IActionResult> GenerateProducts(GenerateProductsDto dto)
         {
             await _productService.GenerateProducts(dto.Quantity);
@@ -25,6 +37,7 @@ namespace ApiPruebaAsis.Controllers
                 Message = $"{dto.Quantity} productos generados correctamente."
             });
         }
+
         [HttpGet]
         public async Task<ActionResult<PagedResponse<ProductDto>>> GetProducts([FromQuery] ProductQueryDto query)
         {
@@ -37,6 +50,27 @@ namespace ApiPruebaAsis.Controllers
             var product = await _productService.GetById(id);
 
             return Ok(product);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id,UpdateProductDto dto)
+        {
+            await _productService.Update(id, dto);
+            return Ok(new
+            {
+                Message = $"Producto actualizado."
+            });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _productService.Delete(id);
+
+            return Ok(new
+            {
+                Message = $"Producto eliminado."
+            });
         }
     }
 }

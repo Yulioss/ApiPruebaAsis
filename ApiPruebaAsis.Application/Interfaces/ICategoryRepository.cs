@@ -7,5 +7,6 @@ namespace ApiPruebaAsis.Application.Interfaces
     {
         Task<Category> AddAsync(Category category);
         Task<List<Category>> GetAllAsync();
+        Task<Category?> GetByIdAsync(int id);
     }
 }
