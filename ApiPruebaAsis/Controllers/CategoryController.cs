@@ -1,83 +1,30 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ApiPruebaAsis.Application.DTOs;
+using ApiPruebaAsis.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPruebaAsis.Controllers
 {
-    public class CategoryController : Controller
+    [ApiController]
+    [Route("[controller]")]
+    public class CategoryController : ControllerBase
     {
-        // GET: CategoryController
-        public ActionResult Index()
+        private readonly ICategoryService _service;
+
+        public CategoryController(ICategoryService service)
         {
-            return View();
+            _service = service;
         }
 
-        // GET: CategoryController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: CategoryController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: CategoryController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(CreateCategoryDto dto)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            var result = await _service.CreateAsync(dto);
 
-        // GET: CategoryController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoryController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: CategoryController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: CategoryController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return CreatedAtAction(
+            nameof(Create),
+            new { id = result.CategoryId },
+            result);
         }
     }
 }
