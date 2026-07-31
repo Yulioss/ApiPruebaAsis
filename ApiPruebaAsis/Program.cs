@@ -2,10 +2,14 @@ using ApiPruebaAsis.Application.Interfaces;
 using ApiPruebaAsis.Application.Services;
 using ApiPruebaAsis.Infrastructure.Data;
 using ApiPruebaAsis.Infrastructure.Repositories;
+using ApiPruebaAsis.Infrastructure.Security;
 using ApiPruebaAsis.Middleware;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +23,28 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(
         builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+builder.Services.AddSingleton<IAuthenticationProvider, AppSettingsAuthenticationProvider>();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(options =>
+{
+    var jwt = builder.Configuration.GetSection("Jwt");
+
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+
+        ValidIssuer = jwt["Issuer"],
+        ValidAudience = jwt["Audience"],
+
+        IssuerSigningKey = new SymmetricSecurityKey(
+            Encoding.UTF8.GetBytes(jwt["Key"]!))
+    };
 });
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();

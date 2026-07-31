@@ -32,6 +32,24 @@ namespace ApiPruebaAsis.Middleware
                     HttpStatusCode.NotFound,
                     ex.Message);
             }
+            catch (UnauthorizedAccessException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+
+                await HandleExceptionAsync(
+                    context,
+                    HttpStatusCode.Unauthorized,
+                    ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+
+                await HandleExceptionAsync(
+                    context,
+                    HttpStatusCode.BadRequest,
+                    ex.Message);
+            }
             catch (Exception ex)
             {
                 _logger.LogError(ex, ex.Message);

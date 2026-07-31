@@ -1,10 +1,12 @@
 ﻿using ApiPruebaAsis.Application.DTOs.Category;
 using ApiPruebaAsis.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPruebaAsis.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class CategoryController : ControllerBase

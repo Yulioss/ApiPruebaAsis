@@ -1,11 +1,11 @@
 ﻿using ApiPruebaAsis.Application.DTOs;
 using ApiPruebaAsis.Application.DTOs.Product;
 using ApiPruebaAsis.Application.Interfaces;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiPruebaAsis.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("[controller]")]
     public class ProductController : ControllerBase
