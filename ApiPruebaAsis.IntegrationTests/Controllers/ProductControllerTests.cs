@@ -25,7 +25,7 @@ namespace ApiPruebaAsis.IntegrationTests.Controllers
         public async Task GetProducts_ReturnsUnauthorized_WhenTokenIsMissing()
         {
             // Act
-            var response = await _client.GetAsync("/api/Product");
+            var response = await _client.GetAsync("/Product");
 
             // Assert
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
