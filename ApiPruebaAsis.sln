@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35913.81 d17.13
+VisualStudioVersion = 17.13.35913.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPruebaAsis", "ApiPruebaAsis\ApiPruebaAsis.csproj", "{D18EDB7A-B7FD-4486-9D5F-3523BD35B606}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPruebaAsis.Domain", "ApiPruebaAsis.Domain\ApiPruebaAsis.Domain.csproj", "{997C022C-52AC-48BE-970F-D662CE3AE99D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPruebaAsis.Infrastructure", "ApiPruebaAsis.Infrastructure\ApiPruebaAsis.Infrastructure.csproj", "{E5BF9230-F027-4B57-8501-0F1F4FF8709E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPruebaAsis.UnitTests", "ApiPruebaAsis.UnitTests\ApiPruebaAsis.UnitTests.csproj", "{031FE5F1-D138-4EDB-91D3-8CE27828B66A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiPruebaAsis.IntegrationTests", "ApiPruebaAsis.IntegrationTests\ApiPruebaAsis.IntegrationTests.csproj", "{C4F35602-CCCE-BED4-A03E-8547CEA49712}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{E5BF9230-F027-4B57-8501-0F1F4FF8709E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5BF9230-F027-4B57-8501-0F1F4FF8709E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5BF9230-F027-4B57-8501-0F1F4FF8709E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{031FE5F1-D138-4EDB-91D3-8CE27828B66A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{031FE5F1-D138-4EDB-91D3-8CE27828B66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{031FE5F1-D138-4EDB-91D3-8CE27828B66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{031FE5F1-D138-4EDB-91D3-8CE27828B66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F35602-CCCE-BED4-A03E-8547CEA49712}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F35602-CCCE-BED4-A03E-8547CEA49712}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F35602-CCCE-BED4-A03E-8547CEA49712}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F35602-CCCE-BED4-A03E-8547CEA49712}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
