@@ -24,10 +24,10 @@ namespace ApiPruebaAsis.IntegrationTests.Controllers
         [Fact]
         public async Task GetProducts_ReturnsUnauthorized_WhenTokenIsMissing()
         {
-            // Act
             var response = await _client.GetAsync("/Product");
 
-            // Assert
+            var body = await response.Content.ReadAsStringAsync();
+
             response.StatusCode.Should().Be(HttpStatusCode.Unauthorized);
         }
     }
