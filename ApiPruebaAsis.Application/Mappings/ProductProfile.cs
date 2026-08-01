@@ -19,8 +19,6 @@ namespace ApiPruebaAsis.Application.Mappings
             .ForMember(x => x.SupplierName,
                 y => y.MapFrom(z => z.Supplier.CompanyName));
 
-            CreateMap<UpdateProductDto, Product>();
-
             CreateMap<CreateProductDto, Product>();
 
         }

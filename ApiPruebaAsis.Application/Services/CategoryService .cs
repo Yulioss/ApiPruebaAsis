@@ -29,5 +29,12 @@ namespace ApiPruebaAsis.Application.Services
 
             return _mapper.Map<CategoryDto>(category);
         }
+
+        public async Task<IEnumerable<CategoryDto>> GetAllAsync()
+        {
+            var categories = await _repository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<CategoryDto>>(categories);
+        }
     }
 }

@@ -10,5 +10,6 @@ namespace ApiPruebaAsis.Application.Interfaces
     public interface ISupplierService
     {
         Task<SupplierDto> CreateAsync(CreateSupplierDto dto);
+        Task<IEnumerable<SupplierDto>> GetAllAsync();
     }
 }

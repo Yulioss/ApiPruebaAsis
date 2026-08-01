@@ -14,7 +14,7 @@ namespace ApiPruebaAsis.Application.Interfaces
         Task GenerateProducts(int quantity);
         Task<PagedResponse<ProductDto>> GetProducts(ProductQueryDto query);
         Task<ProductDto?> GetById(int id);
-        Task Update(int id, UpdateProductDto dto);
+        Task Update(int id, CreateProductDto dto);
         Task Delete(int id);
     }
 }

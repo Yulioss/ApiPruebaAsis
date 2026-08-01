@@ -112,7 +112,7 @@ namespace ApiPruebaAsis.Application.Services
             return _mapper.Map<ProductDto>(product);
         }
 
-        public async Task Update(int id, UpdateProductDto dto)
+        public async Task Update(int id, CreateProductDto dto)
         {
             var product = await _repository.GetByIdAsync(id);
 

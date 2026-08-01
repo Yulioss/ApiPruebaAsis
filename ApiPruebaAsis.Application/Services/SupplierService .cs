@@ -1,4 +1,5 @@
-﻿using ApiPruebaAsis.Application.DTOs.Supplier;
+﻿using ApiPruebaAsis.Application.DTOs.Category;
+using ApiPruebaAsis.Application.DTOs.Supplier;
 using ApiPruebaAsis.Application.Interfaces;
 using ApiPruebaAsis.Domain.Entitites;
 using AutoMapper;
@@ -22,6 +23,7 @@ namespace ApiPruebaAsis.Application.Services
             _repository = repository;
             _mapper = mapper;
         }
+
         public async Task<SupplierDto> CreateAsync(CreateSupplierDto dto)
         {
             var supplier = _mapper.Map<Supplier>(dto);
@@ -29,6 +31,13 @@ namespace ApiPruebaAsis.Application.Services
             supplier = await _repository.AddAsync(supplier);
 
             return _mapper.Map<SupplierDto>(supplier);
+        }
+
+        public async Task<IEnumerable<SupplierDto>> GetAllAsync()
+        {
+            var suppliers = await _repository.GetAllAsync();
+
+            return _mapper.Map<IEnumerable<SupplierDto>>(suppliers);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ApiPruebaAsis.Application.Exceptions;
+using Microsoft.AspNetCore.Http.HttpResults;
 using System.Net;
 using System.Text.Json;
 
@@ -42,6 +43,15 @@ namespace ApiPruebaAsis.Middleware
                     ex.Message);
             }
             catch (ArgumentException ex)
+            {
+                _logger.LogWarning(ex, ex.Message);
+
+                await HandleExceptionAsync(
+                    context,
+                    HttpStatusCode.BadRequest,
+                    ex.Message);
+            }
+            catch (BadRequestException ex)
             {
                 _logger.LogWarning(ex, ex.Message);
 

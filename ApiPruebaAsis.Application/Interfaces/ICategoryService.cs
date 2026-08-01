@@ -10,5 +10,6 @@ namespace ApiPruebaAsis.Application.Interfaces
     public interface ICategoryService
     {
         Task<CategoryDto> CreateAsync(CreateCategoryDto dto);
+        Task<IEnumerable<CategoryDto>> GetAllAsync();
     }
 }
